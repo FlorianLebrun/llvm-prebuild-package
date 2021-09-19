@@ -1,0 +1,35 @@
+set(target "llvm-jit-runtime")
+
+# Unpack LLVM sources
+set(LLVM_SOURCE "${CMAKE_BINARY_DIR}/llvm-${CMAKE_PROJECT_VERSION}.src")
+if(NOT EXISTS ${LLVM_SOURCE})
+  message(STATUS "LLVM unpacking...")
+  execute_process(
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    COMMAND ${CMAKE_COMMAND} -E tar x "${CMAKE_CURRENT_SOURCE_DIR}/llvm-${CMAKE_PROJECT_VERSION}.src.tar.xz"
+  )
+endif()
+
+# Add LLVM project
+set(LLVM_TARGETS_TO_BUILD "X86")
+set(LLVM_ENABLE_EH ON) # "Enable Exception handling"
+set(LLVM_ENABLE_RTTI ON) # "Enable run time type information"
+
+set(LLVM_INCLUDE_TOOLS OFF)
+set(LLVM_BUILD_TOOLS OFF)
+
+set(LLVM_INCLUDE_UTILS OFF)
+set(LLVM_BUILD_UTILS OFF)
+
+set(LLVM_INCLUDE_TESTS OFF)
+set(LLVM_INCLUDE_GO_TESTS OFF)
+set(LLVM_BUILD_TESTS OFF)
+
+set(LLVM_INCLUDE_BENCHMARKS OFF)
+set(LLVM_BUILD_BENCHMARKS OFF)
+
+set(LLVM_INCLUDE_DOCS OFF)
+set(LLVM_ENABLE_OCAMLDOC OFF)
+set(LLVM_ENABLE_BINDINGS OFF)
+
+add_subdirectory("${LLVM_SOURCE}" "${LLVM_SOURCE}-build")
