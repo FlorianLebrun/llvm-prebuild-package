@@ -71,7 +71,7 @@ append_static_directory_copy(commands FILTER "*.h|*.hpp|*.hxx|*.inc|*.def"
 )
 
 # Make lib file
-set(outputLib "${packageDir}/lib/${target}.lib")
+set(outputLib "${packageDir}/lib")
 get_filename_component(MSVC_LIB_TOOL "${CMAKE_LINKER}/../lib.exe" ABSOLUTE)
 if(EXISTS ${MSVC_LIB_TOOL})
   foreach(libname ${LLVM_package_libnames})
@@ -79,7 +79,9 @@ if(EXISTS ${MSVC_LIB_TOOL})
   endforeach()
   add_custom_command(OUTPUT ${outputLib} DEPENDS ${LLVM_RT_LIBNAMES}
     COMMAND ${CMAKE_COMMAND} -E make_directory ${packageDir}/lib
-    COMMAND ${MSVC_LIB_TOOL} /OUT:${outputLib} ${LLVM_package_libs}
+    COMMAND ${MSVC_LIB_TOOL} 
+      "/OUT:${outputLib}/${target}-$<IF:$<CONFIG:Debug>,debug,release>.lib" 
+      ${LLVM_package_libs}
   )
   list(APPEND commands ${outputLib})
 else()
