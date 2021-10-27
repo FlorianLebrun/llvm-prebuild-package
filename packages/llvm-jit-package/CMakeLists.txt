@@ -18,7 +18,8 @@ set(LLVM_package_libnames
   LLVMProfileData
   LLVMPasses
   LLVMOrcJIT
-  LLVMOrcError
+  LLVMOrcTargetProcess
+  LLVMOrcShared
   LLVMObject
   LLVMMCParser
   LLVMMCDisassembler
