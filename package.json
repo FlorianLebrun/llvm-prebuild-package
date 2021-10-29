@@ -1,6 +1,6 @@
 {
     "name": "llvm-prebuild",
-    "version": "12.0.1",
+    "version": "13.0.0",
     "license": "MIT",
     "devDependencies": {
         "script.cmake": "https://github.com/FlorianLebrun/script.cmake.git"
